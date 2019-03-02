@@ -30,9 +30,9 @@ public class Search_Algorithms {
     private int goal_x; // The x-coordinate of the goal position of our search
     private int goal_y; // The y-coordinate of the goal position of our search
     private boolean node_found; // A boolean to alert an algorithm that a given node has been found
-    private List<Node> closed_set;
-    private Queue<Node> open_set;
-    private List<Node> path;
+    private List<Node> closed_set; // Visited Nodes
+    private Queue<Node> open_set; // Unvisited Nodes
+    private List<Node> path; // Path to goal
 
 
     public Search_Algorithms(String file){
@@ -282,8 +282,10 @@ public class Search_Algorithms {
 
 
                 }
+                System.out.println("Path Cost -> " + total_cost);
                 System.out.println("Best First Search Runtime -> " + (double)((System.currentTimeMillis()-startTime)) + " milliseconds");
-                System.out.println("Number of nodes expanded: " + num_nodes_expanded);
+                System.out.println("Number of nodes expanded -> " + num_nodes_expanded);
+                System.out.println("Number of nodes contained in memory -> " + closed_set.size());
                 open_set.clear();
                 closed_set.clear();
 
@@ -363,7 +365,9 @@ public class Search_Algorithms {
                 // This global variable will stop the wrapper once we find the
                 // destination node
                 node_found = true;
-                System.out.println("Total path cost: " + path_cost);
+                System.out.println("Iterative Deepening Runtime -> " + (System.currentTimeMillis() - startTime) + " milliseconds");
+                System.out.println("Total path cost - > " + path_cost);
+                System.out.println("Number of Nodes in memory -> " + visited.size());
                 return num_nodes_expanded;
             }
             // If the depth exceeds the limit then we bre
@@ -472,7 +476,8 @@ public class Search_Algorithms {
                 System.out.print("Goal State Found:" + "("+current.getX()+","+current.getY()+")" + "\n");
                 System.out.println("Path Cost from: " + "("+start.getX()+","+start.getY()+")"+ "to -->" + "("+current.getX()+","+current.getY()+")" + ":" + total_cost);
                 System.out.println("A* Search Runtime -> " + ((System.currentTimeMillis()-startTime)) + " milliseconds");
-                System.out.print("Number of nodes expanded: " + num_nodes_expanded);
+                System.out.println("Number of nodes expanded: " + num_nodes_expanded);
+                System.out.println("Number of nodes in memory " + closed_set.size());
                 open_set.clear();
                 closed_set.clear();
                 return;
